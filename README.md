@@ -1,1 +1,0 @@
-![Home-NodeGoat](./NodeGoatHome.png)

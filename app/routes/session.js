@@ -4,6 +4,8 @@ const {
     environmentalScripts
 } = require("../../config/config");
 
+const ESAPI = require('node-esapi');
+
 /* The SessionHandler must be constructed with a connected db */
 function SessionHandler(db) {
     "use strict";
@@ -69,12 +71,12 @@ function SessionHandler(db) {
                     // const ESAPI = require('node-esapi');
                     // - Step 2: Encode the user input that will be logged in the correct context
                     // following are a few examples:
-                    // console.log('Error: attempt to login with invalid user: %s',
-                    //     ESAPI.encoder().encodeForHTML(userName));
-                    // console.log('Error: attempt to login with invalid user: %s',
-                    //     ESAPI.encoder().encodeForJavaScript(userName));
-                    // console.log('Error: attempt to login with invalid user: %s',
-                    //     ESAPI.encoder().encodeForURL(userName));
+                    console.log('Error: attempt to login with invalid user: %s',
+                         ESAPI.encoder().encodeForHTML(userName));
+                     console.log('Error: attempt to login with invalid user: %s',
+                         ESAPI.encoder().encodeForJavaScript(userName));
+                     console.log('Error: attempt to login with invalid user: %s',
+                         ESAPI.encoder().encodeForURL(userName));
                     // or if you know that this is a CRLF vulnerability you can target this specifically as follows:
                     // console.log('Error: attempt to login with invalid user: %s',
                     //     userName.replace(/(\r\n|\r|\n)/g, '_'));
