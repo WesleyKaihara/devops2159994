@@ -54,35 +54,12 @@ const AllocationsDAO = function(db){
         });
     };
 
-    this.getByUserIdAndThreshold = (userId, threshold, callback) => {
-        const parsedUserId = parseInt(userId);
+    this.getByUserId = (userId, callback) => {
+        const parsedUserId = parseInt(userId)
 
-        const searchCriteria = () => {
-
-            if (threshold) {
-                // Fix for A1 - 2 NoSQL Injection - escape the threshold parameter properly
-                // Fix this NoSQL Injection which doesn't sanitze the input parameter 'threshold' and allows attackers
-                // to inject arbitrary javascript code into the NoSQL query:
-                // 1. 0';while(true){}'
-                // 2. 1'; return 1 == '1
-                // Also implement fix in allocations.html for UX.                             
-                const parsedThreshold = parseInt(threshold, 10);
-                
-                if (parsedThreshold >= 0 && parsedThreshold <= 99) {
-                    return {$where: `this.userId == ${parsedUserId} && this.stocks > ${parsedThreshold}`};
-                }
-                throw `The user supplied threshold: ${parsedThreshold} was not valid.`;
-
-                return {
-                    $where: `this.userId == ${parsedUserId} && this.stocks > '${threshold}'`
-                };
-            }
-            return {
-                userId: parsedUserId
-            };
-        };
-
-        allocationsCol.find(searchCriteria()).toArray((err, allocations) => {
+        allocationsCol.find({ 
+            userId: parsedUserId 
+        }).toArray((err, allocations) => {
             if (err) return callback(err, null);
             if (!allocations.length) return callback("ERROR: No allocations found for the user", null);
 
