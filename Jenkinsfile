@@ -8,7 +8,7 @@ pipeline {
 
 						docker compose version
 						java --version
-						sudo docker info
+					  docker info
 						
 					'''
 				}
