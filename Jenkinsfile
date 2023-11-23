@@ -5,11 +5,10 @@ pipeline {
     	stage('Aula Jenkins 1') {
 				steps {
 					sh '''
-						
+
 						docker info
-						java --version
 						docker compose version
-						
+						java --version
 					'''
 				}
     	}
