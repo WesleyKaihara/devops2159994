@@ -1,7 +1,7 @@
 const UserDAO = require("./user-dao").UserDAO;
 
 /* The AllocationsDAO must be constructed with a connected database object */
-const AllocationsDAO = function(db){
+const AllocationsDAO = function(db) {
 
     "use strict";
 
@@ -57,8 +57,8 @@ const AllocationsDAO = function(db){
     this.getByUserId = (userId, callback) => {
         const parsedUserId = parseInt(userId)
 
-        allocationsCol.find({ 
-            userId: parsedUserId 
+        allocationsCol.find({
+            userId: parsedUserId
         }).toArray((err, allocations) => {
             if (err) return callback(err, null);
             if (!allocations.length) return callback("ERROR: No allocations found for the user", null);
@@ -66,7 +66,7 @@ const AllocationsDAO = function(db){
             let doneCounter = 0;
             const userAllocations = [];
 
-            allocations.forEach( alloc => {
+            allocations.forEach(alloc => {
                 userDAO.getUserById(alloc.userId, (err, user) => {
                     if (err) return callback(err, null);
 

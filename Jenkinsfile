@@ -1,17 +1,13 @@
 pipeline {
-    agent any
-
+    agent {
+        docker { image 'node:20.10.0' }
+    }
     stages {
-    	stage('Aula Jenkins 1') {
-				steps {
-					sh '''
-
-						docker compose version
-						java --version
-					  docker info
-						
-					'''
-				}
-    	}
+        stage('Build') {
+            steps {
+                sh 'docker compose build'
+								sh 'docker compose up'
+            }
+        },
     }
 }

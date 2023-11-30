@@ -9,12 +9,16 @@ function AllocationsHandler(db) {
     const allocationsDAO = new AllocationsDAO(db);
 
     this.displayAllocations = (req, res, next) => {
-        const { userId } = req.session;
+        const {
+            userId
+        } = req.session;
         console.log(userId);
-        
+
         allocationsDAO.getByUserId(userId, (err, allocations) => {
             if (err) return next(err);
-            return res.render("allocations", { allocations });
+            return res.render("allocations", {
+                allocations
+            });
         });
     };
 }

@@ -27,7 +27,7 @@ function SessionHandler(db) {
     this.isAdminUserMiddleware = (req, res, next) => {
         if (req.session.userId) {
             return userDAO.getUserById(req.session.userId, (err, user) => {
-               return user && user.isAdmin ? next() : res.redirect("/login");
+                return user && user.isAdmin ? next() : res.redirect("/login");
             });
         }
         console.log("redirecting to login");
@@ -72,11 +72,11 @@ function SessionHandler(db) {
                     // - Step 2: Encode the user input that will be logged in the correct context
                     // following are a few examples:
                     console.log('Error: attempt to login with invalid user: %s',
-                         ESAPI.encoder().encodeForHTML(userName));
-                     console.log('Error: attempt to login with invalid user: %s',
-                         ESAPI.encoder().encodeForJavaScript(userName));
-                     console.log('Error: attempt to login with invalid user: %s',
-                         ESAPI.encoder().encodeForURL(userName));
+                        ESAPI.encoder().encodeForHTML(userName));
+                    console.log('Error: attempt to login with invalid user: %s',
+                        ESAPI.encoder().encodeForJavaScript(userName));
+                    console.log('Error: attempt to login with invalid user: %s',
+                        ESAPI.encoder().encodeForURL(userName));
                     // or if you know that this is a CRLF vulnerability you can target this specifically as follows:
                     // console.log('Error: attempt to login with invalid user: %s',
                     //     userName.replace(/(\r\n|\r|\n)/g, '_'));

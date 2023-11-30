@@ -27,7 +27,7 @@ const pages = [
     "ssrf"
 ];
 
-for(const page of pages) {
+for (const page of pages) {
     router.get(`/${page}`, (req, res) => {
         "use strict";
         return res.render(`tutorial/${page}`, {
