@@ -1,11 +1,15 @@
 pipeline {
     agent any
 
+		tools {nodejs "nodejs"}
+		
     stages {
     	stage('Info') {
 				steps {
 					sh '''
 						docker compose version
+						node -v
+						npm -v
 					'''
 				}
     	}
