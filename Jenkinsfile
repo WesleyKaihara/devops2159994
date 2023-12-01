@@ -26,6 +26,9 @@ pipeline {
 				}
 			}
 			stage('Run Tests') {
+				agent {
+					docker { image 'node:20.10.0' }
+				}
 				steps {
 					echo 'e2e Tests'
 					sh 'npm run test:e2e'
