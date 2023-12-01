@@ -16,14 +16,13 @@ pipeline {
     	}
 			stage('Install Dependencies') {
 				agent {
-					docker { image 'node:20.10.0' }
+					docker { image 'node:20.10.0' args '-u node' }
 				}
 				steps { 
 					script { 
 						sh '''
 								npm -v
 								node -v
-								npm config set cache ${WORKSPACE}/.npm-cache
 								npm install
 						'''
 					}
