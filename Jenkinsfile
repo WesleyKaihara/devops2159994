@@ -27,14 +27,14 @@ pipeline {
 			}
 			stage('Run Tests') {
 				steps {
-					echo 'CI Verify...'
-					sh 'npm run cy:verify'
+					echo 'CI Tests...'
+					sh 'npm run test:ci'
 
 					echo 'e2e Tests...'
 					sh 'npm run test:e2e'
 					
-					echo 'CI Tests...'
-					sh 'npm run test:ci'
+					echo 'CI Veify...'
+					sh 'npm run cy:verify'
 				}
 			}
 			stage('Run Application') {
