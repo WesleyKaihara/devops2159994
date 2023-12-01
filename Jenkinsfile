@@ -1,6 +1,8 @@
 pipeline {
     agent any
-		
+		tools {
+        nodejs 'node-20.10.0'
+    }
     stages {
     	stage('Info') {
 				steps {
@@ -15,12 +17,6 @@ pipeline {
 				}
     	}
 			stage('Install Dependencies') {
-				agent {
-					docker { 
-						image 'node:20.10.0' 
-						args '-u node' 
-					}
-				}
 				steps { 
 					script { 
 						sh '''
@@ -51,3 +47,23 @@ pipeline {
 			}
     }
 }
+
+pipeline {
+    agent any
+
+    stages {
+    	stage('Initial Pipeline') {
+				steps {
+					sh '''
+
+						docker compose version
+						java --version
+					  docker info
+						
+					'''
+				}
+    	}
+    }
+}
+
+
