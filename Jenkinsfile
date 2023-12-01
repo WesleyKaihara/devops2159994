@@ -22,8 +22,6 @@ pipeline {
 					sh '''
 							npm -v
 							node -v
-							ls
-							npm install
 					'''
 				}
 			}
