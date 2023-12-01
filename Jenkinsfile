@@ -18,8 +18,8 @@ pipeline {
     	// }
 			stage('Prepare Enviroment') {
 				steps {
-					sh 'apt-get update'
-					sh 'apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb'
+					sh 'sudo apt-get update'
+          sh 'sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb'
 				}
 			}
 			stage('Install Dependencies') {
