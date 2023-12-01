@@ -14,6 +14,18 @@ pipeline {
 					sh '''docker compose build'''
 				}
     	}
+			stage('Run Tests') {
+				steps {
+					echo 'Cypress Verify'
+					sh 'npm run cy:verify'
+
+					echo 'e2e Tests'
+					sh 'npm run test:e2e'
+					
+					echo 'CI Tests'
+					sh 'npm run test:ci'
+				}
+			}
 			stage('Run Application') {
 				steps {
 					sh 'docker compose up'
