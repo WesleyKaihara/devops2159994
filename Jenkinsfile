@@ -14,13 +14,19 @@ pipeline {
 					sh '''docker compose build'''
 				}
     	}
-			stage('Run Tests') {
+			stage('Install Dependencies') {
 				agent {
 					docker { image 'node:20.10.0' }
 				}
+				sh '''
+					npm -v
+					node -v
+					npm install
+					'''
+			}
+			stage('Run Tests') {
 				steps {
 					echo 'e2e Tests'
-					sh 'npm install'
 					sh 'npm run test:e2e'
 					
 					echo 'CI Tests'
