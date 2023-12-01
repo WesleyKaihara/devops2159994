@@ -18,11 +18,13 @@ pipeline {
 				agent {
 					docker { image 'node:20.10.0' }
 				}
-				sh '''
-					npm -v
-					node -v
-					npm install
+				steps { 
+					sh '''
+							npm -v
+							node -v
+							npm install
 					'''
+				}
 			}
 			stage('Run Tests') {
 				steps {
