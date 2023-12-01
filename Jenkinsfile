@@ -23,6 +23,7 @@ pipeline {
 						sh '''
 								npm -v
 								node -v
+								npm config set cache /home/jenkins/.npm-cache --global
 								npm install
 						'''
 					}
