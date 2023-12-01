@@ -28,12 +28,9 @@ pipeline {
 				}
 			}
 			stage('Run Tests') {
-				agent {
-					docker { image 'node:20.10.0' }
-				}
 				steps {
 					echo 'e2e Tests'
-					sh 'npm ci'
+					sh 'npm install'
 					sh 'npm run test:e2e'
 					
 					echo 'CI Tests'
@@ -47,23 +44,4 @@ pipeline {
 			}
     }
 }
-
-pipeline {
-    agent any
-
-    stages {
-    	stage('Initial Pipeline') {
-				steps {
-					sh '''
-
-						docker compose version
-						java --version
-					  docker info
-						
-					'''
-				}
-    	}
-    }
-}
-
 
