@@ -4,24 +4,22 @@ pipeline {
         nodejs 'node-20.10.0'
     }
     stages {
-    	stage('Info') {
-				steps {
-					sh '''
-						docker compose version
-					'''
-				}
-    	}
-    	stage('Build') {
-				steps {
-					sh '''docker compose build'''
-				}
-    	}
+    	// stage('Info') {
+			// 	steps {
+			// 		sh '''
+			// 			docker compose version
+			// 		'''
+			// 	}
+    	// }
+			// stage('Build') {
+			// 	steps {
+			// 		sh '''docker compose build'''
+			// 	}
+    	// }
 			stage('Install Dependencies') {
 				steps { 
 					script { 
 						sh '''
-								npm -v
-								node -v
 								npm install
 						'''
 					}
@@ -29,17 +27,19 @@ pipeline {
 			}
 			stage('Run Tests') {
 				steps {
-					echo 'e2e Tests'
-					sh 'npm install'
+					echo 'CI Verify...'
+					sh 'npm run cy:verify'
+
+					echo 'e2e Tests...'
 					sh 'npm run test:e2e'
 					
-					echo 'CI Tests'
+					echo 'CI Tests...'
 					sh 'npm run test:ci'
 				}
 			}
 			stage('Run Application') {
 				steps {
-					sh 'docker compose up'
+					sh 'npm run start-infra'
 				}
 			}
     }
