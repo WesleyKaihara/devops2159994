@@ -3,6 +3,9 @@ pipeline {
 		
     stages {
     	stage('Info') {
+				agent {
+					docker { image 'node:20.10.0' }
+				}
 				steps {
 					sh '''
 						docker compose version
