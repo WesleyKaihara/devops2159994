@@ -19,11 +19,13 @@ pipeline {
 					docker { image 'node:20.10.0' }
 				}
 				steps { 
-					sh '''
-							npm -v
-							node -v
-							ls
-					'''
+					script { 
+						sh '''
+								npm -v
+								node -v
+								npm install
+						'''
+					}
 				}
 			}
 			stage('Run Tests') {
