@@ -2,16 +2,22 @@ pipeline {
     agent any
 
     stages {
-    	stage('Aula Jenkins 1') {
+    	stage('Info') {
 				steps {
 					sh '''
-
 						docker compose version
-						java --version
-					  docker info
-						
 					'''
 				}
     	}
+    	stage('Build') {
+				steps {
+					sh '''docker compose build'''
+				}
+    	}
+			stage('Run Application') {
+				steps {
+					sh 'docker compose up'
+				}
+			}
     }
 }
