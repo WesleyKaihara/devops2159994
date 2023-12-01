@@ -22,6 +22,7 @@ pipeline {
 					sh '''
 							npm -v
 							node -v
+							ls
 					'''
 				}
 			}
@@ -31,6 +32,7 @@ pipeline {
 				}
 				steps {
 					echo 'e2e Tests'
+					sh 'npm ci'
 					sh 'npm run test:e2e'
 					
 					echo 'CI Tests'
