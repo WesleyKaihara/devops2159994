@@ -20,6 +20,7 @@ pipeline {
 				}
 				steps {
 					echo 'e2e Tests'
+					sh 'npm install'
 					sh 'npm run test:e2e'
 					
 					echo 'CI Tests'
