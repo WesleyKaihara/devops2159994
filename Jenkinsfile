@@ -16,12 +16,6 @@ pipeline {
 			// 		sh '''docker compose build'''
 			// 	}
     	// }
-			stage('Prepare Enviroment') {
-				steps {
-					sh 'sudo apt-get update'
-          sh 'sudo apt-get install -y libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libnss3 libxss1 libasound2 libxtst6 xauth xvfb'
-				}
-			}
 			stage('Install Dependencies') {
 				steps { 
 						sh 'npm install'
@@ -29,6 +23,9 @@ pipeline {
 			}
 			stage('Run Tests') {
 				steps {
+					echo 'e2e Tests...'
+					sh 'npm test'
+
 					echo 'e2e Tests...'
 					sh 'npm run test:e2e'
 
