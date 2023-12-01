@@ -16,9 +16,6 @@ pipeline {
     	}
 			stage('Run Tests') {
 				steps {
-					echo 'Cypress Verify'
-					sh 'npm run cy:verify'
-
 					echo 'e2e Tests'
 					sh 'npm run test:e2e'
 					
