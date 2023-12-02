@@ -52,7 +52,7 @@
             <div class="panel-body">
                 <p>1.The insecure demo application uses HTTP connection to communicate with server. A secure HTTPS sever can be set using https module. This would need a private key and certificate. Here are source code examples from
                     <code>/server.js</code>
-                    <pre>
+                <pre>
 // Load keys for establishing secure HTTPS connection
 var fs = require("fs");
 var https = require("https");
@@ -64,7 +64,7 @@ var httpsOptions = {
                </pre>
                 </p>
                 <p>2. Start secure HTTPS sever
-                    <pre>
+                <pre>
 // Start secure HTTPS server
 https.createServer(httpsOptions, app).listen(config.port, function() {
     console.log("Express https server listening on port " + config.port);
@@ -74,7 +74,7 @@ https.createServer(httpsOptions, app).listen(config.port, function() {
                 <p>
                     3. The insecure demo application stores users personal sensitive information in plain text. To fix it, The
                     <code>data/profile-dao.js</code>can be modified to use crypto module to encrypt and decrypt sensitive information as below:
-                    <pre>
+                <pre>
 // Include crypto module
 var crypto = require("crypto");
 

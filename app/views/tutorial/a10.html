@@ -31,13 +31,13 @@
                 <iframe width="560" height="315" src="//www.youtube.com/embed/z98AQF8J_zg?rel=0" frameborder="0" allowfullscreen></iframe>
                 <p>Here is code from
                     <code>routes/index.js</code>,
-                    <pre>
+                <pre>
     // Handle redirect for learning resources link
     app.get("/learn", function (req, res, next) {
         return res.redirect(req.query.url);
     });
                     </pre> An attacker can change the
-                    <code>url</code>query parameter to point to malicious website and share it. Victims are more likely to click on it, as the initial part of the link (before query parameters) points to a trusted site.
+                <code>url</code>query parameter to point to malicious website and share it. Victims are more likely to click on it, as the initial part of the link (before query parameters) points to a trusted site.
                 </p>
             </div>
         </div>
@@ -51,7 +51,8 @@
                     <li>Simply avoid using redirects and forwards.</li>
                     <li>If used, don’t involve user parameters in calculating the destination. This can usually be done.</li>
                     <li>If destination parameters can’t be avoided, ensure that the supplied value is valid, and authorized for the user.
-                        <br>It is recommended that any such destination parameters be a mapping value, rather than the actual URL or portion of the URL, and that server side code translate this mapping to the target URL.</li>
+                        <br>It is recommended that any such destination parameters be a mapping value, rather than the actual URL or portion of the URL, and that server side code translate this mapping to the target URL.
+                    </li>
                 </ol>
             </div>
         </div>

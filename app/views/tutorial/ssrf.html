@@ -23,13 +23,13 @@
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/neClYWB05bQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <p>Here is a code snippet from
                     <code>routes/research.js</code>,
-                    <pre>
+                <pre>
     // If a stock symbol has been submitted, concatenate the symbol to the URL and return the HTTP Response
     if (req.query.symbol) {
         var url = req.query.url+req.query.symbol; 
         needle.get(url, function(error, newResponse) { ... }
                     </pre> An attacker can change the
-                    <code>url</code> and <code>symbol</code> parameters to point to an attacker-controlled website to interact with the server.
+                <code>url</code> and <code>symbol</code> parameters to point to an attacker-controlled website to interact with the server.
                 </p>
             </div>
         </div>

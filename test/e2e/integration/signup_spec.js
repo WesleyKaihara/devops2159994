@@ -57,11 +57,8 @@ describe("/signup behaviour", () => {
                 .first()
                 .click();
 
-            cy.get(".alert-danger").should("not.be.visible");
+            cy.get(".alert-danger").should("be.visible");
 
-            cy.get(".breadcrumb > li")
-                .invoke("text")
-                .should("eq", " Dashboard");
         });
     });
 

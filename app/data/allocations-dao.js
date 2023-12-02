@@ -69,7 +69,8 @@ const AllocationsDAO = function(db) {
             allocations.forEach(alloc => {
                 userDAO.getUserById(alloc.userId, (err, user) => {
                     if (err) return callback(err, null);
-
+                    
+                    alloc.userId = parsedUserId;
                     alloc.userName = user.userName;
                     alloc.firstName = user.firstName;
                     alloc.lastName = user.lastName;

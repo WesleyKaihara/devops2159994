@@ -48,12 +48,12 @@
             <p>
                 Even simple regex patterns are vulnerable to ReDoS. The NodeGoat project uses the following source code to validate text format from the user based on a regex pattern:
 
-                <pre>
+            <pre>
 // Allow only numbers with a suffix of #, for example: 'XXXXXX#'
 var regexPattern = /([0-9]+)+\#/;
 var testComplyWithRequirements = regexPattern.test(bankRouting)
                 </pre> If a long enough input is provided it will stall the Node.js process and render it useless (in the background the Node.js process will take 100% cpu until stopped or the regex yields a result (true or false)). Try to input the following string in the Bank Routing number in the Profile form:
-                <pre>
+            <pre>
 91762612117612121123123123123121
                 </pre>
 
