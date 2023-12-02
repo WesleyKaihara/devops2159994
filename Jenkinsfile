@@ -11,22 +11,38 @@ pipeline {
 			}
 			stage('Run Tests') {
 				steps {
-					echo 'e2e Tests...'
+					echo 'Tests...'
 					sh 'npm test'
 
-					echo 'CI Veify...'
+					echo 'Cypress Veify...'
 					sh 'npm run cy:verify'
 
-					// echo 'e2e Tests...'
-					// sh 'npm run test:e2e'
+					// echo 'CI Tests...'
+					// sh 'npm run test:ci'
 
+				}
+			}
+			stage('Start Production Enviroment') {
+				steps {
+					sh 'npm run start-infra'
+				}
+			}
+			stage("CI Tests") {
+				steps {
 					echo 'CI Tests...'
 					sh 'npm run test:ci'
 				}
 			}
-			stage('Run Application') {
+			stage("E2E Tests") {
 				steps {
-					sh 'npm run start-infra'
+					echo 'e2e Tests...'
+					sh 'npm run test:e2e'
+				}
+			}
+			stage("Build Application") {
+				steps {
+					sh 'Building...'
+					sh 'npm run start'
 				}
 			}
     }
