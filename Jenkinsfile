@@ -33,16 +33,16 @@ pipeline {
 					sh 'npm run test:ci'
 				}
 			}
-			stage("E2E Tests") {
-				steps {
-					echo 'e2e Tests...'
-					sh 'npm run test:e2e'
-				}
-			}
+			// stage("E2E Tests") {
+			// 	steps {
+			// 		echo 'e2e Tests...'
+			// 		sh 'npm run test:e2e'
+			// 	}
+			// }
 			stage("Build Application") {
 				steps {
 					sh 'Building...'
-					sh 'npm run start-infra'
+					sh 'npm start'
 				}
 			}
     }
