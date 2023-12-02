@@ -22,9 +22,9 @@ pipeline {
 
 				}
 			}
-			stage('Start Production Enviroment') {
+			stage('Start test Enviroment') {
 				steps {
-					sh 'npm run start-infra'
+					sh 'docker compose up -d'
 				}
 			}
 			stage("CI Tests") {
@@ -42,8 +42,18 @@ pipeline {
 			stage("Build Application") {
 				steps {
 					sh 'Building...'
-					sh 'npm run start'
+					sh 'npm run start-infra'
 				}
+			}
+    }
+
+		post {
+			success {
+					echo 'Build finished!'
+			}
+
+			failure {
+					echo 'Build failed'
 			}
     }
 }
