@@ -9,6 +9,12 @@ pipeline {
 						sh 'npm install'
 				}
 			}
+			stage('Start Mongo') {
+				steps {
+					echo 'Starting mongoDB...'
+					sh 'npm run docker-mongo'
+				}
+			}
 			stage('Run Tests') {
 				steps {
 					echo 'Tests...'
@@ -22,7 +28,7 @@ pipeline {
 
 				}
 			}
-			stage('Start test Enviroment') {
+			stage('Start Test Enviroment') {
 				steps {
 					sh 'docker compose up -d'
 				}
@@ -39,6 +45,12 @@ pipeline {
 			// 		sh 'npm run test:e2e'
 			// 	}
 			// }
+			stage("Stop Test Enviroment") {
+				steps {
+					echo 'CI Tests...'
+					sh 'docker compose down'
+				}
+			}
 			stage("Deploy Application") {
 				steps {
 					echo 'Building...'
