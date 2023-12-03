@@ -39,9 +39,10 @@ pipeline {
 			// 		sh 'npm run test:e2e'
 			// 	}
 			// }
-			stage("Build Application") {
+			stage("Deploy Application") {
 				steps {
-					sh 'Building...'
+					echo 'Building...'
+					// echo 'docker compose up'
 					sh 'npm start'
 				}
 			}
