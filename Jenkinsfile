@@ -51,9 +51,9 @@ pipeline {
 					sh 'npm run docker-mongo'
 				}
 			}
-			stage("Deploy Application") {
+			stage("Start Application") {
 				steps {
-					echo 'Building...'
+					echo 'Running...'
 					// echo 'docker compose up'
 					sh 'npm start'
 				}
