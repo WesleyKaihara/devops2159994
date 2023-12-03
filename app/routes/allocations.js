@@ -12,11 +12,11 @@ function AllocationsHandler(db) {
         const {
             userId
         } = req.session;
-        console.log(userId);
 
         allocationsDAO.getByUserId(userId, (err, allocations) => {
             if (err) return next(err);
             return res.render("allocations", {
+                userId,
                 allocations
             });
         });

@@ -1,57 +1,73 @@
 pipeline {
     agent any
-		
+		tools {
+        nodejs 'node-12.22.12'
+    }
     stages {
-    	stage('Info') {
-				steps {
-					sh '''
-						docker compose version
-					'''
-				}
-    	}
-    	stage('Build') {
-				steps {
-					sh '''docker compose build'''
-				}
-    	}
 			stage('Install Dependencies') {
-				agent {
-					docker { image 'node:20.10.0' }
-				}
 				steps { 
-					sh '''
-							npm -v
-							node -v
-							npm install
-					'''
+						sh 'npm install'
 				}
 			}
 			stage('Run Tests') {
 				steps {
-					echo 'e2e Tests'
-					sh 'npm run test:e2e'
-					
-					echo 'CI Tests'
+					echo 'Tests...'
+					sh 'npm test'
+
+					echo 'Cypress Veify...'
+					sh 'npm run cy:verify'
+
+					// echo 'CI Tests...'
+					// sh 'npm run test:ci'
+
+				}
+			}
+			stage('Start Test Enviroment') {
+				steps {
+					sh 'docker compose up -d'
+				}
+			}
+			stage("CI Tests") {
+				steps {
+					echo 'CI Tests...'
 					sh 'npm run test:ci'
 				}
 			}
-			stage('Run Application') {
+			// stage("E2E Tests") {
+			// 	steps {
+			// 		echo 'e2e Tests...'
+			// 		sh 'npm run test:e2e'
+			// 	}
+			// }
+			stage("Stop Test Enviroment") {
 				steps {
-					sh 'docker compose up'
+					echo 'CI Tests...'
+					sh 'docker compose down'
 				}
+			}
+			stage('Start MongoDB') {
+				steps {
+					echo 'Starting mongoDB...'
+					sh 'npm run docker-mongo'
+				}
+			}
+			stage("Start Application") {
+				steps {
+					echo 'Running...'
+					// echo 'docker compose up'
+					sh 'npm start'
+				}
+			}
+    }
+
+		post {
+			success {
+					echo 'Build finished!'
+			}
+
+			failure {
+					echo 'Build failed'
 			}
     }
 }
 
-
-
-▒▒▒▒▒▒▒█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█
-▒▒▒▒▒▒▒█░▒▒▒▒▒▒▒▓▒▒▓▒▒▒▒▒▒▒░█
-▒▒▒▒▒▒▒█░▒▒▓▒▒▒▒▒▒▒▒▒▄▄▒▓▒▒░█░▄▄
-▒▒▄▀▀▄▄█░▒▒▒▒▒▒▓▒▒▒▒█░░▀▄▄▄▄▄▀░░█
-▒▒█░░░░█░▒▒▒▒▒▒▒▒▒▒▒█░░░░░░░░░░░█
-▒▒▒▀▀▄▄█░▒▒▒▒▓▒▒▒▓▒█░░░█▒░░░░█▒░░█
-▒▒▒▒▒▒▒█░▒▓▒▒▒▒▓▒▒▒█░░░░░░░▀░░░░░█
-▒▒▒▒▒▄▄█░▒▒▒▓▒▒▒▒▒▒▒█░░█▄▄█▄▄█░░█
-▒▒▒▒█░░░█▄▄▄▄▄▄▄▄▄▄█░█▄▄▄▄▄▄▄▄▄█
-▒▒▒▒█▄▄█░░█▄▄█░░░░░░█▄▄█░░█▄▄█

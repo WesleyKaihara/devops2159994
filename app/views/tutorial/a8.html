@@ -41,9 +41,9 @@
                 <p>For example, CSRF vulnerability can be exploited on profile form on the insecure demo application.</p>
                 <iframe width="560" height="315" src="//www.youtube.com/embed/vRDykS_2y3I?rel=0" frameborder="0" allowfullscreen></iframe>
                 <p>To exploit it:
-                    <ol>
-                        <li>An attacker would need to host a forged form like below on a malicious sever.
-                            <pre>
+                <ol>
+                    <li>An attacker would need to host a forged form like below on a malicious sever.
+                        <pre>
     &lt;html lang="en"&gt;
     &lt;head&gt;&lt;/head&gt;
     	&lt;body&gt;
@@ -57,10 +57,10 @@
     	&lt;/body&gt;
     &lt;/html&gt;
               </pre> Note: A sample app containing form for CSRF attack on NodeGoat app is available <a target="_blank" href="https://github.com/ckarande/nodegoat-csrf-attack">here</a>.
-                        </li>
-                        <li>Next, attacker would need to manage opening the form on logged in victim's browser and attract user to submit it. When user submits this form, it results in victim user's browser sending a malicious request to vulnerable server, causing CSRF attack.
-                        </li>
-                    </ol>
+                    </li>
+                    <li>Next, attacker would need to manage opening the form on logged in victim's browser and attract user to submit it. When user submits this form, it results in victim user's browser sending a malicious request to vulnerable server, causing CSRF attack.
+                    </li>
+                </ol>
                 </p>
 
             </div>

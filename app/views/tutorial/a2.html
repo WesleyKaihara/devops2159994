@@ -101,7 +101,7 @@
                         <p>password gets stored in database in plain text . Here is related code in
                             <code>data/user-dao.js</code>
                             <code>addUser()</code>method:
-                            <pre>
+                        <pre>
 // Create user document
 var user = {
     userName: userName,
@@ -148,7 +148,7 @@ app.use(express.cookieParser());
                         <p>2. In addition, sets
                             <code>HTTPOnly</code>HTTP header preventing cookies being accessed by scripts. The application used HTTPS secure connections, and cookies are configured to be sent only on Secure HTTPS connections by setting
                             <code>Secure</code>flag.
-                            <pre>
+                        <pre>
 app.use(express.session({
     secret: "s3Cur3",
     cookie: {
@@ -160,28 +160,28 @@ app.use(express.session({
                         </p>
                         <p>
                             3. When user clicks logout, destroy the session and session cookie
-                            <pre>
+                        <pre>
 req.session.destroy(function() {
     res.redirect("/");
 });
                         </pre> Note: The example code uses
-                            <code>MemoryStore</code>to manage session data, which is not designed for production environment, as it will leak memory, and will not scale past a single process. Use database based storage MongoStore or RedisStore for production. Alternatively, sessions can be managed using popular passport module.
-                            <br />
-                            <br />
-                            <h3>3. Session hijacking</h3>
+                        <code>MemoryStore</code>to manage session data, which is not designed for production environment, as it will leak memory, and will not scale past a single process. Use database based storage MongoStore or RedisStore for production. Alternatively, sessions can be managed using popular passport module.
+                        <br />
+                        <br />
+                        <h3>3. Session hijacking</h3>
 
-                            <p>The insecure demo application does not regenerate a new session id upon user's login, therefore rendering a vulnerability of session hijacking if an attacker is able to somehow steal the cookie with the session id and use it.
+                        <p>The insecure demo application does not regenerate a new session id upon user's login, therefore rendering a vulnerability of session hijacking if an attacker is able to somehow steal the cookie with the session id and use it.
 
-                                <p>Upon login, a security best practice with regards to cookies session management would be to regenerate the session id so that if an id was already created for a user on an insecure medium (i.e: non-HTTPS website or otherwise), or if an attacker was able to get their hands on the cookie id before the user logged-in, then the old session id will render useless as the logged-in user with new privileges holds a new session id now.
-                                </p>
+                        <p>Upon login, a security best practice with regards to cookies session management would be to regenerate the session id so that if an id was already created for a user on an insecure medium (i.e: non-HTTPS website or otherwise), or if an attacker was able to get their hands on the cookie id before the user logged-in, then the old session id will render useless as the logged-in user with new privileges holds a new session id now.
+                        </p>
 
-                                <p>To secure the application:</p>
-                                <p>1. Re-generate a new session id upon login (and best practice is to keep regenerating them
-                                    upon requests or at least upon sensitive actions like a user's password reset.
+                        <p>To secure the application:</p>
+                        <p>1. Re-generate a new session id upon login (and best practice is to keep regenerating them
+                            upon requests or at least upon sensitive actions like a user's password reset.
 
-                                    Re-generate a session id as follows:
-                                    By wrapping the below code as a function callback for the method req.session.regenerate()
-                                    <pre>
+                            Re-generate a session id as follows:
+                            By wrapping the below code as a function callback for the method req.session.regenerate()
+                        <pre>
 req.session.regenerate(function() {
 
   req.session.userId = user._id;
@@ -194,7 +194,7 @@ req.session.regenerate(function() {
 
 })
                         </pre>
-                                </p>
+                        </p>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -274,10 +274,10 @@ req.session.regenerate(function() {
                         <p><b>Additional Measures</b>
                         </p>
                         <p>
-                            <ul>
-                                <li>For additional protection against brute forcing, enforce account disabling after an established number of invalid login attempts (e.g., five attempts is common). The account must be disabled for a period of time sufficient to discourage brute force guessing of credentials, but not so long as to allow for a denial-of-service attack to be performed.</li>
-                                <li>Only send non-temporary passwords over an encrypted connection or as encrypted data, such as in an encrypted email. Temporary passwords associated with email resets may be an exception. Enforce the changing of temporary passwords on the next use. Temporary passwords and links should have a short expiration time.</li>
-                            </ul>
+                        <ul>
+                            <li>For additional protection against brute forcing, enforce account disabling after an established number of invalid login attempts (e.g., five attempts is common). The account must be disabled for a period of time sufficient to discourage brute force guessing of credentials, but not so long as to allow for a denial-of-service attack to be performed.</li>
+                            <li>Only send non-temporary passwords over an encrypted connection or as encrypted data, such as in an encrypted email. Temporary passwords associated with email resets may be an exception. Enforce the changing of temporary passwords on the next use. Temporary passwords and links should have a short expiration time.</li>
+                        </ul>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -287,11 +287,12 @@ req.session.regenerate(function() {
                     <div class="panel-body">
                         <p>
                             The demo application doesn't enforce strong password. In routes/session.js
-                            <code>validateSignup()</code>method, the regex for password enforcement is simply <pre>var PASS_RE = /^.{1,20}$/;</pre>
+                            <code>validateSignup()</code>method, the regex for password enforcement is simply
+                        <pre>var PASS_RE = /^.{1,20}$/;</pre>
                         </p>
                         <p>
                             A stronger password can be enforced using the regex below, which requires at least 8 character password with numbers and both lowercase and uppercase letters.
-                            <pre>var PASS_RE =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;</pre>
+                        <pre>var PASS_RE =/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;</pre>
                         </p>
                         <p>
                             Another issue, in routes/session.js, the
